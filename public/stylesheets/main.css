@@ -1,0 +1,20 @@
+.card img {
+    width: 100%;
+}
+
+.card .caption-full {
+    padding: 9px;
+}
+
+.card {
+    padding: 0;
+    margin: 10px;
+}
+
+.jumbotron {
+    margin: 10px;
+}
+
+.delete-form {
+    display: inline;
+}
