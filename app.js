@@ -9,6 +9,8 @@ var express       = require("express"),
     Comment       = require("./models/comment"),
     User          = require("./models/user"),
     seedDB        = require("./seeds");
+    
+//add fuzzy search to campgrouds
  
 //REQUIRING ROUTES   
 var commentRoutes     = require("./routes/comments"),
