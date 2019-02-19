@@ -20,13 +20,14 @@ router.get("/", function(req, res){
 router.post("/", middleware.isLoggedIn, function(req, res){
  //get data from form and add to array
  var name = req.body.name;
+ var price = req.body.price;
  var image = req.body.image;
  var desc = req.body.description;
  var author = {
      id: req.user._id,
      username: req.user.username
  };
- var newCampground = {name: name, image: image, description: desc, author: author};
+ var newCampground = {name: name, price: price, image: image, description: desc, author: author};
  
  //Create a new campground and save to db
  Campground.create(newCampground,function(err, newlyCreated){
@@ -49,8 +50,9 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 router.get("/:id", function(req, res) {
   //find the campground with provided id
   Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
-    if(err){
-      console.log(err);
+    if(err || !foundCampground){
+      req.flash("error", "Campground not found");
+      res.redirect("back");
     } else {
       console.log(foundCampground);
       res.render("campgrounds/show", {campground: foundCampground});
